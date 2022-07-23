@@ -1,12 +1,12 @@
 cask "dataspell" do
   arch = Hardware::CPU.intel? ? "" : "-aarch64"
 
-  version "2022.1.2,221.5787.37"
+  version "2022.1.4,221.6008.15"
 
   if Hardware::CPU.intel?
-    sha256 "fb4e54a1d9cd5992f2801ba6aa92c48d081cb511b11015016cf2793d5f8e25e5"
+    sha256 "189448cc7640daa9a41dcec13ef3559d1da1fd3c9254d52725fef8c0bd766223"
   else
-    sha256 "b8aada9a3191b8c2d13053aa1056c0b637dec1a0bf59629e146a9199118714b5"
+    sha256 "dda7cbe7dfa5c821eaa55c14ac64c265997f042d3a4d8758d04d6d65e1109c0b"
   end
 
   url "https://download.jetbrains.com/python/dataspell-#{version.csv.first}#{arch}.dmg"
@@ -30,7 +30,7 @@ cask "dataspell" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "dataspell") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

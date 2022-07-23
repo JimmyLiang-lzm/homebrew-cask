@@ -12,8 +12,8 @@ cask "microsoft-word" do
     version "16.54.21101001"
     sha256 "7f3ed397b517aac3637d8b8f8b4233f9e7132941f0657eaca8ec423ac068616e"
   else
-    version "16.61.22050700"
-    sha256 "888a3011de7d8326f9a8c02045656146ab594bc1bd1bbb99abfad6774e5c4711"
+    version "16.63.22070801"
+    sha256 "ce111feba4bf2437d640995825fdfaea9102d6ae3599733bbd2efb4a1b9a6b0c"
   end
 
   url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_#{version}_Installer.pkg",
@@ -41,10 +41,11 @@ cask "microsoft-word" do
       ]
 
   uninstall pkgutil:   [
-    "com.microsoft.package.Microsoft_Word.app",
-    "com.microsoft.pkg.licensing",
-  ],
-            launchctl: "com.microsoft.office.licensingV2.helper"
+              "com.microsoft.package.Microsoft_Word.app",
+              "com.microsoft.pkg.licensing",
+            ],
+            launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2"
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.Word",

@@ -1,6 +1,6 @@
 cask "prey" do
-  version "1.10.3"
-  sha256 "a150052af843834d92784b796eb80f240c2de65de4b4b4afe909110660d85d4a"
+  version "1.10.8"
+  sha256 "03cdfb78b0807e23c55c51c057ec2a060c66534c9a5e57214f4ecef3af15137d"
 
   url "https://downloads.preyproject.com/prey-client-releases/node-client/#{version}/prey-mac-#{version}-x64.pkg"
   name "Prey"
@@ -14,7 +14,7 @@ cask "prey" do
   pkg "prey-mac-#{version}-x64.pkg"
 
   preflight do
-    ENV["API_KEY"] = ENV["HOMEBREW_PREY_SETUP_API_KEY"]
+    ENV["API_KEY"] = ENV.fetch("HOMEBREW_PREY_SETUP_API_KEY", nil)
   end
 
   uninstall pkgutil:   "com.prey.agent",

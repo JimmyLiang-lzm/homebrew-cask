@@ -1,12 +1,12 @@
 cask "goland" do
   arch = Hardware::CPU.intel? ? "" : "-aarch64"
 
-  version "2022.1.2,221.5787.30"
+  version "2022.1.4,221.6008.15"
 
   if Hardware::CPU.intel?
-    sha256 "eeae429e511927b054f43498c1a6768a7bdae5e71fbf8f243bf500b9ff734156"
+    sha256 "7eb050aae9eb92d05c877f2f71710bd57258fc129ec9c83c2b1da9375cf847e5"
   else
-    sha256 "d2d67b52118bc12671b56d1b69c0e73c305d1cc077b17ac30904eb14b970d923"
+    sha256 "2b497cc725a24bccc4599808e6b7513fc884240ac08b3b749cea472373298c20"
   end
 
   url "https://download.jetbrains.com/go/goland-#{version.csv.first}#{arch}.dmg"
@@ -30,7 +30,7 @@ cask "goland" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "goland") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

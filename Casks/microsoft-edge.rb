@@ -2,12 +2,12 @@ cask "microsoft-edge" do
   folder = Hardware::CPU.intel? ? "C1297A47-86C4-4C1F-97FA-950631F94777" : "03adf619-38c6-4249-95ff-4a01c0ffc962"
   linkid = Hardware::CPU.intel? ? "2069148" : "2093504"
 
-  version "102.0.1245.39"
+  version "103.0.1264.62"
 
   if Hardware::CPU.intel?
-    sha256 "ec48251f586bb3bcbf90e4b94ac1553787a335b1997add1e6742e767ac3eb355"
+    sha256 "fbdf91394979b9637d86ee732f977412121bb377d546042b90b2558db3233aa0"
   else
-    sha256 "91c742288b8a4549cea14fa5237396ebd0ade2f761634fad114294f4f3547767"
+    sha256 "7bd588c18c8c56a982668212093617d079207d405193e34a34b5c370ce43ab4d"
   end
 
   url "https://officecdn-microsoft-com.akamaized.net/pr/#{folder}/MacAutoupdate/MicrosoftEdge-#{version}.pkg",
@@ -35,11 +35,11 @@ cask "microsoft-edge" do
   uninstall pkgutil: "com.microsoft.edgemac"
 
   zap trash: [
-    "~/Library/Application Support/Microsoft Edge",
-    "~/Library/Application Support/Microsoft/EdgeUpdater",
-    "~/Library/Caches/Microsoft Edge",
-    "~/Library/Preferences/com.microsoft.edgemac.plist",
-    "~/Library/Saved Application State/com.microsoft.edgemac.savedState",
-  ],
+        "~/Library/Application Support/Microsoft Edge",
+        "~/Library/Application Support/Microsoft/EdgeUpdater",
+        "~/Library/Caches/Microsoft Edge",
+        "~/Library/Preferences/com.microsoft.edgemac.plist",
+        "~/Library/Saved Application State/com.microsoft.edgemac.savedState",
+      ],
       rmdir: "/Library/Application Support/Microsoft"
 end

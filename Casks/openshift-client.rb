@@ -1,10 +1,10 @@
 cask "openshift-client" do
-  version "4.10.18"
+  version "4.10.24"
 
   if Hardware::CPU.intel?
-    sha256 "285c307491d8ffd19c065a942515fda78e53f95289d4b4985aa4c92439f7f339"
+    sha256 "6f4c57b485d9016c5a04abfe67e20a48e565d52f9aa1d56a20c23b2a82fb829d"
   else
-    sha256 "4a6efa36a00e6de6f630ca00703a559edb276fa511db7b841fab33b3af12f43c"
+    sha256 "cb6c0092efca2631f22620ca67b055e2bb8e08cc82701b3e6a7884abb906bfc0"
   end
 
   arch = Hardware::CPU.intel? ? "" : "-arm64"

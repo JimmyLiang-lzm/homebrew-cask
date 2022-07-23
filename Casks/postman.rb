@@ -1,18 +1,25 @@
 cask "postman" do
-  arch = Hardware::CPU.intel? ? "osx_64" : "osx_arm64"
+  arch = Hardware::CPU.intel? ? "osx64" : "osx_arm64"
 
-  version "9.20.3"
-  sha256 :no_check
+  version "9.25.0"
 
-  url "https://dl.pstmn.io/download/latest/#{arch}",
-      verified: "dl.pstmn.io/download/latest/"
+  if Hardware::CPU.intel?
+    sha256 "389eed54b5aabb8734a4a22ff67c7983cedce5f4db6eabbdd6cb46bf621918db"
+  else
+    sha256 "dc69330a31cff558a97a2f58c0c390d93cae14c3bfa5c9e73259f7f1b1d4396b"
+  end
+
+  url "https://dl.pstmn.io/download/version/#{version}/#{arch}",
+      verified: "dl.pstmn.io/download/version/"
   name "Postman"
   desc "Collaboration platform for API development"
   homepage "https://www.postman.com/"
 
   livecheck do
-    url :url
-    strategy :header_match
+    url "https://dl.pstmn.io/api/version/latest"
+    strategy :page_match do |page|
+      JSON.parse(page)["version"]
+    end
   end
 
   auto_updates true
