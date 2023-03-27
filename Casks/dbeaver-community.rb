@@ -1,13 +1,9 @@
 cask "dbeaver-community" do
-  arch = Hardware::CPU.intel? ? "x86_64" : "aarch64"
+  arch arm: "aarch64", intel: "x86_64"
 
-  version "22.1.2"
-
-  if Hardware::CPU.intel?
-    sha256 "17ac6407d5e21fad0f4ae3e20e54a1e10ccc8c07df689be3c8122b8524d1e23a"
-  else
-    sha256 "90117eac2147bdeca50290cb2b7674614557769e4b178db86af192c4d4e302a4"
-  end
+  version "23.0.1"
+  sha256 arm:   "e4c7cc434d288d86059ad292528458641571ab67e96b4e37ddd3642cec67a801",
+         intel: "b1a4b67bc11faa24ec2acfab21d28cf036e97cd4b4d5166e9ec0b6442ea863a5"
 
   url "https://dbeaver.io/files/#{version}/dbeaver-ce-#{version}-macos-#{arch}.dmg"
   name "DBeaver Community Edition"
@@ -18,6 +14,8 @@ cask "dbeaver-community" do
     url "https://github.com/dbeaver/dbeaver"
     strategy :github_latest
   end
+
+  auto_updates true
 
   app "DBeaver.app"
 

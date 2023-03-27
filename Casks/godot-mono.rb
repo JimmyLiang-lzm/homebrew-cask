@@ -1,11 +1,11 @@
 cask "godot-mono" do
-  version "3.4.4"
-  sha256 "f1958336cf79fd777749ebe1313786ba86ab9c0293cbefe1aecdb54053a425ab"
+  version "4.0.1"
+  sha256 "0746903e0e39304485a547b98bca8fbc19e93787d804771063c8b0c6ad8b41e2"
 
-  url "https://downloads.tuxfamily.org/godotengine/#{version}/mono/Godot_v#{version}-stable_mono_osx.universal.zip",
+  url "https://downloads.tuxfamily.org/godotengine/#{version}/mono/Godot_v#{version}-stable_mono_macos.universal.zip",
       verified: "downloads.tuxfamily.org/godotengine/"
   name "Godot Engine"
-  desc "2D and 3D game engine"
+  desc "C# scripting capable version of Godot game engine"
   homepage "https://godotengine.org/"
 
   livecheck do
@@ -13,7 +13,13 @@ cask "godot-mono" do
     regex(/^v?(\d+(?:\.\d+)+)[._-]stable$/i)
   end
 
-  depends_on formula: "mono"
+  depends_on cask: "dotnet-sdk"
 
   app "Godot_mono.app"
+
+  zap trash: [
+    "~/Library/Application Support/Godot",
+    "~/Library/Caches/Godot",
+    "~/Library/Saved Application State/org.godotengine.godot.savedState",
+  ]
 end

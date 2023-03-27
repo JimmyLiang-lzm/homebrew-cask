@@ -1,6 +1,6 @@
 cask "kstars" do
-  version "3.5.9"
-  sha256 "d765f8f8776f1eb88f8d7b3ce6bb13d4a91379686a5e0ae904d0186d5cb82076"
+  version "3.6.3"
+  sha256 "f4d66bbdb09ebb673c9ffbba4940bbd82ee0eb299c86b5cfbd49049406591ace"
 
   url "https://www.indilib.org/jdownloads/kstars/kstars-#{version}.dmg",
       verified: "indilib.org/jdownloads/kstars/"
@@ -13,7 +13,7 @@ cask "kstars" do
     regex(%r{href=.*?/kstars-(\d+(?:\.\d+)+)\.dmg}i)
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "kstars.app"
 end

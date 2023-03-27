@@ -1,13 +1,9 @@
 cask "figma" do
-  arch = Hardware::CPU.intel? ? "mac" : "mac-arm"
+  arch arm: "mac-arm", intel: "mac"
 
-  version "116.2.3"
-
-  if Hardware::CPU.intel?
-    sha256 "a47315bef8e22bc4552be805f8509144cf56ae6e1323cdb0db74ae8e76109470"
-  else
-    sha256 "11cbd7ab52c302d8b601742daee0153e7a18b43ee241ba45dbe2ef28abfcba63"
-  end
+  version "116.7.103"
+  sha256 arm:   "8c4e28d7d9d6ae08465d060c0793a9733ba0f43e31a88b9f9e4f541b51814be4",
+         intel: "39ec10b75605c9c1839ce6bed4f84c4b7e523f8b991201e7bcd5c9cb6df05d58"
 
   url "https://desktop.figma.com/#{arch}/Figma-#{version}.zip"
   name "Figma"
@@ -16,8 +12,8 @@ cask "figma" do
 
   livecheck do
     url "https://desktop.figma.com/#{arch}/RELEASE.json"
-    strategy :page_match do |page|
-      JSON.parse(page)["version"]
+    strategy :json do |json|
+      json["version"]
     end
   end
 

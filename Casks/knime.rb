@@ -1,6 +1,6 @@
 cask "knime" do
-  version "4.6.0"
-  sha256 "c7b001d0963afccc99df9a89931cee7cb06fd14bfb9fee69f6f3ff31ddb7b753"
+  version "4.7.1"
+  sha256 "30ddcd3459a64d920fe6e8ef7a87d699b8e175398bd39cf3ebe5154da7bd216c"
 
   url "https://download.knime.org/analytics-platform/macosx/knime_#{version}.app.macosx.cocoa.x86_64.dmg",
       verified: "download.knime.org/analytics-platform/macosx/"
@@ -10,8 +10,8 @@ cask "knime" do
 
   livecheck do
     url "https://download.knime.org/analytics-platform/macosx/knime-latest-app.macosx.cocoa.x86_64.dmg"
-    strategy :header_match
     regex(/knime[._-]v?(\d+(?:\.\d+)+).*?\.dmg/i)
+    strategy :header_match
   end
 
   depends_on macos: ">= :high_sierra"

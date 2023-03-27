@@ -1,16 +1,12 @@
 cask "baidunetdisk" do
-  version "4.11.0"
+  arch arm: "arm64", intel: "x64"
 
-  if Hardware::CPU.intel?
-    sha256 "99f150a2519fd05a3e706ff267401e6867f4fb1b329bc43e6076fdaf37b157ba"
-    url "https://issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/BaiduNetdisk_mac_#{version}.dmg",
-        verified: "issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/"
-  else
-    sha256 "07ab63de9c64c60ab6b50ea0d49233876cd5344e6fe83dc0bc43bd4f4c1c36fe"
-    url "https://issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/BaiduNetdisk_mac_#{version}_arm64.dmg",
-        verified: "issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/"
-  end
+  version "4.19.2"
+  sha256 arm:   "75d72baa27f2f3729c5b1b06e0dc260f65e7275665e15562c99069e4b613cac0",
+         intel: "c47d0d807c2763e23ffb52fca9df13456c5fdf99a20c08220662f8ab2bf709ce"
 
+  url "https://issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/#{version}/BaiduNetdisk_mac_#{version}_#{arch}.dmg",
+      verified: "issuepcdn.baidupcs.com/issue/netdisk/MACguanjia/"
   name "Baidu NetDisk"
   name "百度网盘"
   desc "Cloud storage service"
@@ -18,7 +14,7 @@ cask "baidunetdisk" do
 
   livecheck do
     url "https://pan.baidu.com/disk/cmsdata?do=client"
-    regex(/BaiduNetdisk[._-]mac[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    regex(/BaiduNetdisk[._-]mac[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.dmg/i)
   end
 
   auto_updates true

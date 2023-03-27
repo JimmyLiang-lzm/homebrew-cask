@@ -1,18 +1,26 @@
 cask "marsedit" do
-  version "4.5.9,10278"
-  sha256 "792a1a50e3a8eecf2478ccc3f20723cca90a180b640fd519d8b640f575b4d20d"
+  version "5.0.4"
+  sha256 "b1862c5f46708af136dac2a4eb73bbb96cae0ab02b8204828a06cacef9d1f867"
 
-  url "https://redsweater.com/marsedit/MarsEdit#{version.csv.first}.zip"
+  url "https://redsweater.com/marsedit/MarsEdit#{version}.zip"
   name "MarsEdit"
   desc "Tool to write, preview and publish blogs"
   homepage "https://redsweater.com/marsedit/"
 
   livecheck do
     url "https://redsweater.com/marsedit/appcast#{version.major}.php"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :catalina"
 
   app "MarsEdit.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.red-sweater.*",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.red-sweater.marsedit5.sfl2",
+    "~/Library/Caches/com.apple.helpd/Generated/com.red-sweater.marsedit5.help*",
+    "~/Library/Containers/com.red-sweater.marsedit5.*",
+    "~/Library/Group Containers/493CVA9A35.com.red-sweater",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "stats" do
-  version "2.7.26"
-  sha256 "0311e6c955d7b01d0e330b369dbb9ca1056d2c3c39390109f47c92fd099956d3"
+  version "2.8.14"
+  sha256 "d34011fc96a9c69935295011f51aa1b55c0c36fdbc27179ed0179c811946c64f"
 
   url "https://github.com/exelban/stats/releases/download/v#{version}/Stats.dmg"
   name "Stats"
@@ -8,7 +8,7 @@ cask "stats" do
   homepage "https://github.com/exelban/stats"
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :mojave"
 
   app "Stats.app"
 
@@ -20,5 +20,6 @@ cask "stats" do
     "~/Library/Containers/eu.exelban.Stats.LaunchAtLogin",
     "~/Library/Cookies/eu.exelban.Stats.binarycookies",
     "~/Library/Preferences/eu.exelban.Stats.plist",
+    "/Library/LaunchDaemons/eu.exelban.Stats.SMC.Helper.plist",
   ]
 end

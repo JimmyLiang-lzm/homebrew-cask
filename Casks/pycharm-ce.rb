@@ -1,13 +1,9 @@
 cask "pycharm-ce" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2022.1.4,221.6008.17"
-
-  if Hardware::CPU.intel?
-    sha256 "ca7ebc7ccb87c83118db3bc576c8fc7d80beb341852882047362d12c8020ca9c"
-  else
-    sha256 "01908d356a4cef100926243a1741daa2792fbb14c7735d919e418027f6114d45"
-  end
+  version "2022.3.3,223.8836.43"
+  sha256 arm:   "270388941ad525c5a96e885b3450a345e34ec82c2360c82554aa1d3537bc0fd9",
+         intel: "2681947868b6f64a9b528fb2083347cd15f1094f1e880a25eaa1c96eb7a1406f"
 
   url "https://download.jetbrains.com/python/pycharm-community-#{version.csv.first}#{arch}.dmg"
   name "Jetbrains PyCharm Community Edition"
@@ -17,8 +13,8 @@ cask "pycharm-ce" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PCC&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["PCC"].map do |release|
+    strategy :json do |json|
+      json["PCC"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -39,15 +35,20 @@ cask "pycharm-ce" do
   end
 
   zap trash: [
+    "~/Library/Application Support/JetBrains/PyCharmCE#{version.major_minor}",
     "~/Library/Application Support/PyCharm#{version.major_minor}",
+    "~/Library/Caches/com.apple.python/Applications/PyCharm CE.app",
     "~/Library/Caches/JetBrains/PyCharmCE#{version.major_minor}",
     "~/Library/Caches/PyCharm#{version.major_minor}",
     "~/Library/Caches/PyCharmCE#{version.major_minor}",
     "~/Library/Logs/JetBrains/PyCharmCE#{version.major_minor}",
     "~/Library/Logs/PyCharm#{version.major_minor}",
     "~/Library/Logs/PyCharmCE#{version.major_minor}",
+    "~/Library/Preferences/com.jetbrains.pycharm.ce.plist",
+    "~/Library/Preferences/jetbrains.jetprofile.asset.plist",
     "~/Library/Preferences/PyCharm#{version.major_minor}",
     "~/Library/Preferences/PyCharmCE#{version.major_minor}",
+    "~/Library/Saved Application State/com.jetbrains.pycharm.ce.savedState",
     "~/Library/Saved Application State/com.jetbrains.pycharm.savedState",
   ]
 end

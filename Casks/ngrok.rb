@@ -1,12 +1,13 @@
 cask "ngrok" do
-  arch = Hardware::CPU.intel? ? "amd64" : "arm64"
+  arch arm: "arm64", intel: "amd64"
 
-  if Hardware::CPU.intel?
-    version "3.0.6,mStkVrofaG9,a"
-    sha256 "26695c41b93e6437b797fcc0f6e78242ec8c665e8e57f436aa6305b9237e3ac1"
-  else
-    version "3.0.6,91H3cQoKGUw,a"
-    sha256 "f17dd2755abc3db298bfac5279c0d633d08fc96e69708a332d9c65b57328a9f6"
+  on_arm do
+    version "3.2.1,ieMpdKGZc6g,a"
+    sha256 "896f37cff976229b39392916f23403349c350f871cb63677cb6b4fbafb97faee"
+  end
+  on_intel do
+    version "3.2.1,9jMiBksxbSZ,a"
+    sha256 "0687f6eb27be27defe78156e37dc22aa253fe19997a2dd024376a3bed4bbf281"
   end
 
   url "https://bin.equinox.io/#{version.csv.third}/#{version.csv.second}/ngrok-v#{version.major}-#{version.csv.first}-stable-darwin-#{arch}.zip",
@@ -29,5 +30,8 @@ cask "ngrok" do
     set_permissions "#{staged_path}/ngrok", "0755"
   end
 
-  zap trash: "~/.ngrok#{version.major}"
+  zap trash: [
+    "~/.ngrok#{version.major}",
+    "~/Library/Application Support/ngrok",
+  ]
 end

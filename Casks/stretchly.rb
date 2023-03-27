@@ -1,13 +1,9 @@
 cask "stretchly" do
-  arch = Hardware::CPU.intel? ? "" : "-arm64"
+  arch arm: "-arm64"
 
-  version "1.10.0"
-
-  if Hardware::CPU.intel?
-    sha256 "d5bff265d0d3142af98629b648ec4d39d4058aaad4d55a8f4780f1682ce1a471"
-  else
-    sha256 "b27a6a4d20c3da67c7868088d7e464414eca5f7a010806c708716ec2f0e6deba"
-  end
+  version "1.13.1"
+  sha256 arm:   "eca5d39db3061127a2b984ab1283a2d6619c08dd9644eca72f5291509f1dda21",
+         intel: "2f22b63ce5f8bd05b0248218b9af5555535901d2a287fd896a5ae281196976e5"
 
   url "https://github.com/hovancik/stretchly/releases/download/v#{version}/stretchly-#{version}#{arch}.dmg",
       verified: "github.com/hovancik/stretchly/"

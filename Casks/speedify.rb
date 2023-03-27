@@ -1,6 +1,6 @@
 cask "speedify" do
-  version "12.3.0,9139"
-  sha256 "633f6d3e9da71ab4e69cf120853fbc5958e990f3aea85847d62deb01a0879315"
+  version "13.1.0,9416"
+  sha256 "8f7a45ec3fe82ef05bf022c93232aaa7fbe0ddec63eda7d2401033b6f5431395"
 
   url "https://downloads.speedify.com/Speedify-#{version.csv.first}.#{version.csv.second}.dmg"
   name "Speedify"
@@ -17,11 +17,10 @@ cask "speedify" do
   app "Speedify.app"
 
   uninstall launchctl: [
-              "me.connectify.SMJobBlessHelper",
-              "SpeedifyService",
-              "SwitchboardService",
-            ],
-            script:    "#{appdir}/Speedify.app/Contents/Resources/uninstall-speedify-service.sh"
+    "me.connectify.SMJobBlessHelper",
+    "SpeedifyService",
+    "SwitchboardService",
+  ]
 
   zap trash: "~/Library/Speedify"
 end

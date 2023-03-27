@@ -1,13 +1,9 @@
 cask "visual-studio-code" do
-  arch = Hardware::CPU.intel? ? "darwin" : "darwin-arm64"
+  arch arm: "darwin-arm64", intel: "darwin"
 
-  version "1.69.2"
-
-  if Hardware::CPU.intel?
-    sha256 "f616025cb4160ea3210eb71766848d3482ad2cb96c8187acbe1341b31c70a1d8"
-  else
-    sha256 "da3b2b92d9eabf39f15cf63ca3b2215c7090b7cf94c6af2d4a04247bd9a29981"
-  end
+  version "1.76.2"
+  sha256 arm:   "e4db6ebf7c777db9433a50383ab83c17c141d7e5248c683f32f21b216178cca3",
+         intel: "68a73ba9a6b223de4e2f20d92aaf03b2ce97fe0954187c5c4d97a69a507556e0"
 
   url "https://update.code.visualstudio.com/#{version}/#{arch}/stable"
   name "Microsoft Visual Studio Code"

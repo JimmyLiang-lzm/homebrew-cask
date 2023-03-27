@@ -1,6 +1,6 @@
 cask "qsync-client" do
-  version "5.0.3.0328"
-  sha256 "9977c153f16858353df7f735e492395de75a9eec95a37761247c0c10ec626958"
+  version "5.0.5.1416"
+  sha256 "8b827231fd2d3f29287105138239b0b784e387b51a1f6fe94c46b4f27e8a0e17"
 
   url "https://download.qnap.com/Storage/Utility/QNAPQsyncClientMac-#{version}.dmg"
   name "Qnap Qsync"

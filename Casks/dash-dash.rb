@@ -1,12 +1,17 @@
 cask "dash-dash" do
-  version "0.17.0.3"
-  sha256 "5b6ce9f43fc07f5e73c0de6890929adcda31e29479f06605b4f7434e04348041"
+  version "18.2.2"
+  sha256 "b70c5fb7c916f093840b9adb6f0287488843e0e69b403e99ed0bc93d34e24f85"
 
   url "https://github.com/dashpay/dash/releases/download/v#{version}/dashcore-#{version}-osx.dmg",
       verified: "github.com/dashpay/dash/"
   name "Dash"
   desc "Dash - Reinventing Cryptocurrency"
   homepage "https://www.dash.org/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Dash-Qt.app"
 

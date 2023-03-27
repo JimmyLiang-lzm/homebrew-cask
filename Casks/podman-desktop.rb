@@ -1,16 +1,12 @@
 cask "podman-desktop" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "0.0.5"
-
-  if Hardware::CPU.intel?
-    sha256 "5b30ceb773846d1014a112b52ff644d8df40c3419e3d9d066cce227ad248a8cf"
-  else
-    sha256 "eb0dba442229668ea15d9eedf6c730dc7b60d484debb0c761b625f5a4adc3195"
-  end
+  version "0.12.0"
+  sha256 arm:   "98e5c8e4bd6b474e7492ab188298315eeb867536dea2e602761178e98ae1317f",
+         intel: "61c29f3ffdda9646837e2a3c9e0e1b77b4fbabee873ba81737144c126d6401cc"
 
   url "https://github.com/containers/podman-desktop/releases/download/v#{version}/podman-desktop-#{version}-#{arch}.dmg",
-      verified: "https://github.com/containers/podman-desktop"
+      verified: "github.com/containers/podman-desktop"
   name "Podman Desktop"
   desc "Browse, manage, inspect containers and images"
   homepage "https://podman-desktop.io/"
@@ -21,7 +17,7 @@ cask "podman-desktop" do
   end
 
   depends_on formula: "podman"
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :catalina"
 
   app "Podman Desktop.app"
 

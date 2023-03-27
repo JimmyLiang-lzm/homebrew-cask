@@ -1,37 +1,57 @@
 cask "evernote" do
-  if MacOS.version <= :el_capitan
+  on_el_capitan :or_older do
     version "7.2.3_456885"
     sha256 "eb9a92d57ceb54570c009e37fa7657a0fa3ab927a445eef382487a3fdde6bb97"
 
     url "https://cdn1.evernote.com/mac-smd/public/Evernote_RELEASE_#{version}.dmg"
-  elsif MacOS.version <= :high_sierra
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_sierra do
     version "7.14_458244"
     sha256 "1049a40b8497c0e37d7fed8828552dba89fa52c826134e05b0d56e431e5033ad"
 
     url "https://cdn1.evernote.com/mac-smd/public/Evernote_RELEASE_#{version}.dmg"
-  else
-    version "10.41.5,3540,fc7ed4329d"
-    sha256 "ed04b5217577b07369d35f38236100d87bf7979dfd790517c7f2d5d7f175ddab"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_high_sierra do
+    version "7.14_458244"
+    sha256 "1049a40b8497c0e37d7fed8828552dba89fa52c826134e05b0d56e431e5033ad"
+
+    url "https://cdn1.evernote.com/mac-smd/public/Evernote_RELEASE_#{version}.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_mojave :or_newer do
+    version "10.54.4,3978,986a1704b8"
+    sha256 "17074863f30c83ba2aa3cbaa38e597a797e0db82ac393d37590f25c063f7dea3"
 
     url "https://cdn1.evernote.com/boron/mac/builds/Evernote-#{version.csv.first}-mac-ddl-ga-#{version.csv.second}-#{version.csv.third}.dmg"
+
+    livecheck do
+      url "https://evernote.s3.amazonaws.com/boron/mac/public/latest-mac.yml"
+      regex(/Evernote[._-](\d+(?:\.\d+)+)-mac-ddl-ga-(\d+(?:\.\d+)*)-([0-9a-f]+)\.dmg/i)
+      strategy :electron_builder do |yaml, regex|
+        yaml["files"]&.map do |file|
+          match = file["url"]&.match(regex)
+          next if match.blank?
+
+          "#{match[1]},#{match[2]},#{match[3]}"
+        end
+      end
+    end
   end
 
   name "Evernote"
   desc "App for note taking, organizing, task lists, and archiving"
   homepage "https://evernote.com/"
-
-  livecheck do
-    url "https://evernote.s3.amazonaws.com/boron/mac/public/latest-mac.yml"
-    regex(/Evernote[._-](\d+(?:\.\d+)+)-mac-ddl-ga-(\d+(?:\.\d+)*)-([0-9a-f]+)\.dmg/i)
-    strategy :electron_builder do |yaml, regex|
-      yaml["files"]&.map do |file|
-        match = file["url"]&.match(regex)
-        next if match.blank?
-
-        "#{match[1]},#{match[2]},#{match[3]}"
-      end
-    end
-  end
 
   auto_updates true
 

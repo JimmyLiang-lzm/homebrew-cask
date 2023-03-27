@@ -1,14 +1,10 @@
 cask "studio-3t" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
-  livecheckarch = Hardware::CPU.intel? ? "" : "_aarch64"
+  arch arm: "-aarch64"
+  livecheckarch = on_arch_conditional arm: "_aarch64"
 
-  version "2022.7.0"
-
-  if Hardware::CPU.intel?
-    sha256 "7a514c52dbf5065563a378434349be854eef650781f2e6325638afd4c39c5e97"
-  else
-    sha256 "44b660c5156279c96893a7066e20921cff9a1c72016f570744a42179e986639e"
-  end
+  version "2023.2.0"
+  sha256 arm:   "efad6426172950f8fff1320aa52780a7a535c48ea714c4d9b1bc97851e5d0f7c",
+         intel: "8daf1e0201766b3065e4665f39ae79d9154bb58866e647ef922a3ce036dad658"
 
   url "https://download.studio3t.com/studio-3t/mac#{arch}/#{version}/Studio-3T.dmg"
   name "Studio 3T"
@@ -23,4 +19,12 @@ cask "studio-3t" do
   auto_updates true
 
   app "Studio 3T.app"
+
+  zap trash: [
+    "~/.3T/studio-3t/",
+    "~/Library/Preferences/3t.enterprise.mongochef.plist",
+    "~/Library/Preferences/3t.mongochef.core.plist",
+    "~/Library/Preferences/3t.mongochef.enterprise.plist",
+    "~/Library/Preferences/3t.mongochef.pro.plist",
+  ]
 end

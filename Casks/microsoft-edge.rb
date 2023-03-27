@@ -1,14 +1,11 @@
 cask "microsoft-edge" do
-  folder = Hardware::CPU.intel? ? "C1297A47-86C4-4C1F-97FA-950631F94777" : "03adf619-38c6-4249-95ff-4a01c0ffc962"
-  linkid = Hardware::CPU.intel? ? "2069148" : "2093504"
+  folder = on_arch_conditional arm:   "03adf619-38c6-4249-95ff-4a01c0ffc962",
+                               intel: "C1297A47-86C4-4C1F-97FA-950631F94777"
+  linkid = on_arch_conditional arm: "2093504", intel: "2069148"
 
-  version "103.0.1264.62"
-
-  if Hardware::CPU.intel?
-    sha256 "fbdf91394979b9637d86ee732f977412121bb377d546042b90b2558db3233aa0"
-  else
-    sha256 "7bd588c18c8c56a982668212093617d079207d405193e34a34b5c370ce43ab4d"
-  end
+  version "111.0.1661.54"
+  sha256 arm:   "94715b25318177ecf710a69d765112d289052120703298048dbd6037dcc1229d",
+         intel: "2aa48f41380cf83cd1520a270d316374f364e24f39535cd99e58b07313b4bb2c"
 
   url "https://officecdn-microsoft-com.akamaized.net/pr/#{folder}/MacAutoupdate/MicrosoftEdge-#{version}.pkg",
       verified: "officecdn-microsoft-com.akamaized.net/"
@@ -35,11 +32,24 @@ cask "microsoft-edge" do
   uninstall pkgutil: "com.microsoft.edgemac"
 
   zap trash: [
+        "~/Library/Application Scripts/com.microsoft.edgemac.wdgExtension",
         "~/Library/Application Support/Microsoft Edge",
         "~/Library/Application Support/Microsoft/EdgeUpdater",
+        "~/Library/Caches/com.microsoft.edgemac",
+        "~/Library/Caches/com.microsoft.EdgeUpdater",
         "~/Library/Caches/Microsoft Edge",
+        "~/Library/Containers/com.microsoft.edgemac.wdgExtension",
+        "~/Library/HTTPStorages/com.microsoft.edgemac",
+        "~/Library/HTTPStorages/com.microsoft.edgemac.binarycookies",
+        "~/Library/HTTPStorages/com.microsoft.EdgeUpdater",
+        "~/Library/LaunchAgents/com.microsoft.EdgeUpdater.update.plist",
+        "~/Library/LaunchAgents/com.microsoft.EdgeUpdater.update-internal.*.plist",
+        "~/Library/LaunchAgents/com.microsoft.EdgeUpdater.wake.*.plist",
+        "~/Library/Microsoft/EdgeUpdater",
         "~/Library/Preferences/com.microsoft.edgemac.plist",
+        "~/Library/Saved Application State/com.microsoft.edgemac.app.*.savedState/",
         "~/Library/Saved Application State/com.microsoft.edgemac.savedState",
+        "~/Library/WebKit/com.microsoft.edgemac",
       ],
       rmdir: "/Library/Application Support/Microsoft"
 end

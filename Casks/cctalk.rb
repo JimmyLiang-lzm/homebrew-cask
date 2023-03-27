@@ -1,8 +1,8 @@
 cask "cctalk" do
-  version "7.9.5.6"
-  sha256 "6f9ec965957a8db69632df89fdfdc8bdb90e3971ae3bea67ab69f2fdc30729aa"
+  version "7.10.3-1332"
+  sha256 "7f4016cc5754d6fc89120401f1329f6e746934d0d4949b4496edb8a2aef12cfb"
 
-  url "https://cc.hjfile.cn/cc/#{version}/8/1/103/#{version}.dmg",
+  url "https://cc.hjfile.cn/cc/CCtalk.#{version}/8/1/103/CCtalk.#{version}.dmg",
       verified: "cc.hjfile.cn/"
   name "CCtalk"
   desc "Real-time interactive education platform"
@@ -10,6 +10,7 @@ cask "cctalk" do
 
   livecheck do
     url "https://www.cctalk.com/webapi/basic/v1.1/version/down?apptype=1&terminalType=8&versionType=103"
+    regex(/CCtalk[._-]v?(\d+(?:\.\d+)+-\d+)/i)
     strategy :header_match
   end
 

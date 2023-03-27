@@ -1,13 +1,9 @@
 cask "intellij-idea" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2022.1.4,221.6008.13"
-
-  if Hardware::CPU.intel?
-    sha256 "c30c823d24a79eefc4a0f8e9c497c5e4e984cc44e9bcd011dae2a593926b46ea"
-  else
-    sha256 "d324ee0ea7f72855826921eaa689b9a53b6038d752b6e5f7f895f3bf0d727d3b"
-  end
+  version "2022.3.3,223.8836.41"
+  sha256 arm:   "627fdf0818f829ffa3c63275d51128ca23f27bca9945508e4743716856329043",
+         intel: "500b38341a13f2365b0052fadc91f83431db27c223036458171298a3bdd4b8b9"
 
   url "https://download.jetbrains.com/idea/ideaIU-#{version.csv.first}#{arch}.dmg"
   name "IntelliJ IDEA Ultimate"
@@ -16,8 +12,8 @@ cask "intellij-idea" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=IIU&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["IIU"].map do |release|
+    strategy :json do |json|
+      json["IIU"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end

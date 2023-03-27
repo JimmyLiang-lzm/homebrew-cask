@@ -1,13 +1,9 @@
 cask "tagspaces" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "4.4.3"
-
-  if Hardware::CPU.intel?
-    sha256 "f40a73828459b5dd5cd31063bd0cfdfeef4736e2a6594951ca1658060bd6965d"
-  else
-    sha256 "62faf39ce08575421d3a9d67763399c2ee4a1bca09ebae3401b747fa0867e8dd"
-  end
+  version "5.2.5"
+  sha256 arm:   "3e1e6f9327f80839dd274665bafbcd60fb5661cc972548673a461e57092a5c9b",
+         intel: "6b5d9fc6f00500b81843f937a8dea2cf75855fe37685ca66854f74cc9d0574b7"
 
   url "https://github.com/tagspaces/tagspaces/releases/download/v#{version}/tagspaces-mac-#{arch}-#{version}.dmg",
       verified: "github.com/tagspaces/tagspaces/"

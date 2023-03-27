@@ -1,8 +1,8 @@
 cask "godot" do
-  version "3.4.4"
-  sha256 "8dbc086c7403042e1c001ac669596f5c4ba0f363cd458405154356f06c1398e5"
+  version "4.0.1"
+  sha256 "7386e9cdcd7d83340ecc424fee774b56cce0a9ba290d308097451ec23bfa685f"
 
-  url "https://downloads.tuxfamily.org/godotengine/#{version}/Godot_v#{version}-stable_osx.universal.zip",
+  url "https://downloads.tuxfamily.org/godotengine/#{version}/Godot_v#{version}-stable_macos.universal.zip",
       verified: "downloads.tuxfamily.org/godotengine/"
   name "Godot Engine"
   desc "Game development engine"

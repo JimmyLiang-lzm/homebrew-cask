@@ -1,13 +1,9 @@
 cask "goland" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2022.1.4,221.6008.15"
-
-  if Hardware::CPU.intel?
-    sha256 "7eb050aae9eb92d05c877f2f71710bd57258fc129ec9c83c2b1da9375cf847e5"
-  else
-    sha256 "2b497cc725a24bccc4599808e6b7513fc884240ac08b3b749cea472373298c20"
-  end
+  version "2022.3.4,223.8836.56"
+  sha256 arm:   "279b522a7ee3c22dd0b5eec20b116921209008d4d50d0d5a7a08a13fb98914c9",
+         intel: "c42568393732fd8c25f81167a9e984c79c84095a9d394138c014814738ad5628"
 
   url "https://download.jetbrains.com/go/goland-#{version.csv.first}#{arch}.dmg"
   name "Goland"
@@ -16,8 +12,8 @@ cask "goland" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["GO"].map do |release|
+    strategy :json do |json|
+      json["GO"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end

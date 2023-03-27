@@ -1,13 +1,9 @@
 cask "clion" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2022.1.3,221.5921.27"
-
-  if Hardware::CPU.intel?
-    sha256 "6358b42546906c43e46499ea176f901df83ed8c922af65aad068ed048248138d"
-  else
-    sha256 "60f3f83cc1e526f126c89c444928c2ab5dfaf26aab109de5f05baca2fdf20a24"
-  end
+  version "2022.3.3,223.8836.42"
+  sha256 arm:   "c271f9c704626a14381e6fd8f99b2cd5a370545c660e059b8afd677c8558dd7b",
+         intel: "d07ecaf7e3950cbbc445b59049a40b018a07e0f7031169b28acb185d74b1b20c"
 
   url "https://download.jetbrains.com/cpp/CLion-#{version.csv.first}#{arch}.dmg"
   name "CLion"
@@ -16,8 +12,8 @@ cask "clion" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=CL&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["CL"].map do |release|
+    strategy :json do |json|
+      json["CL"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end

@@ -1,13 +1,13 @@
 cask "i1profiler" do
-  version "3.5.0.15651"
-  sha256 "3baa9efeacc2b73a8fff5839f07cb97efe109c62886f4d56c06c7d8005950e4a"
+  version "3.6.2.16933"
+  sha256 "22db78faff816ebe81b7ee9b5986d63250fbf9311a2e69117ee2ba759a9fa7cd"
 
   url "https://downloads.xrite.com/downloads/software/i1Profiler/#{version.major_minor_patch}/Mac/i1Profiler.zip"
   name "i1Profiler"
   name "Eye-One Profiler"
   name "i1Publish"
   desc "Automation and creative controls for photographers and designers"
-  homepage "https://www.xrite.com/service-support/downloads/I/i1Profiler-i1Publish_V#{version.major_minor_patch.dots_to_underscores}"
+  homepage "https://www.xrite.com/service-support/product-support/formulation-and-qc-software/i1profiler"
 
   livecheck do
     url "https://downloads.xrite.com/downloads/autoupdate/i1profiler_mac_appcast.xml"

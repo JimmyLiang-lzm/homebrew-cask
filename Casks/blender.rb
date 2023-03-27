@@ -1,15 +1,11 @@
 cask "blender" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "3.2.1"
+  version "3.4.1"
+  sha256 arm:   "5f628965f7209b8497be9a9d1854e1c859a9d22cf7731c3538e4c46f7fed8e85",
+         intel: "f820d363b74694f2a7a4deca8780ae0dbdce3f312e02cc8234c199ce30bd6c9e"
 
   url "https://download.blender.org/release/Blender#{version.major_minor}/blender-#{version}-macos-#{arch}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "a1b8aa2d02dd867ef5585d120c0159f40e1a3fa698691a27537e809ec18a72e1"
-  else
-    sha256 "4cba3141d8afba496e1eb4ced4cd7f2d2f9cbf901a3d089db6599d7bf728ba9a"
-  end
-
   name "Blender"
   desc "3D creation suite"
   homepage "https://www.blender.org/"

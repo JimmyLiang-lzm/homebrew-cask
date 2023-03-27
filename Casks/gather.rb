@@ -1,21 +1,27 @@
 cask "gather" do
-  arch = Hardware::CPU.intel? ? "" : "-arm64"
+  arch arm: "-arm64"
 
-  version "0.3.1"
-
-  if Hardware::CPU.intel?
-    sha256 "26ea3843a23b7b76c76525270f02f1971c394c28b072391c766dfab9fc14f6d3"
-  else
-    sha256 "615eb42de1d110c1a43095e8bbf1b592581918ebfe254ab657ad6951a2539722"
-  end
+  version "0.5.15"
+  sha256 arm:   "ab51d432adb0242821ed4480311edfdff01f20b96961782b801890a7dd662720",
+         intel: "9b2f1969ee0adaebf0340fc75664bf995267bcd636beedc05fe6b02c406f4f4c"
 
   url "https://github.com/gathertown/gather-town-desktop-releases/releases/download/v#{version}/Gather-#{version}#{arch}-mac.zip",
-      verified: "github.com/gathertown/gather-town-desktop-releases"
+      verified: "github.com/gathertown/gather-town-desktop-releases/"
   name "Gather Town"
   desc "Virtual video-calling space"
   homepage "https://gather.town/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   app "Gather.app"
 
-  zap trash: "~/Library/Application Support/Gather"
+  zap trash: [
+    "~/Library/Application Support/Gather",
+    "~/Library/Logs/Gather",
+    "~/Library/Preferences/com.gather.Gather.plist",
+    "~/Library/Saved Application State/com.gather.Gather.savedState",
+  ]
 end

@@ -1,14 +1,10 @@
 cask "github" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
-  platform = Hardware::CPU.intel? ? "darwin" : "darwin-arm64"
+  arch arm: "arm64", intel: "x64"
+  platform = on_arch_conditional arm: "darwin-arm64", intel: "darwin"
 
-  version "3.0.5-25b66588"
-
-  if Hardware::CPU.intel?
-    sha256 "987a03547689a44b14b795b4d52424a58424e1fd5691d1dcc68054def8845c4f"
-  else
-    sha256 "3d24d135107f3111c641b5ed0fc8baf182e717aac66e79aeef9751575d604ed8"
-  end
+  version "3.2.0-3a1561b0"
+  sha256 arm:   "a3dd8f50db0c9730a2cf02c159fd52e63f0684971ffe63d3fb761734d4dc7c75",
+         intel: "46ba34a9aa8c17cdc74c50806842adb1fcf3331806fc7458326f9192bbf76936"
 
   url "https://desktop.githubusercontent.com/github-desktop/releases/#{version}/GitHubDesktop-#{arch}.zip",
       verified: "desktop.githubusercontent.com/github-desktop/"
@@ -18,8 +14,8 @@ cask "github" do
 
   livecheck do
     url "https://central.github.com/deployments/desktop/desktop/latest/#{platform}"
-    strategy :header_match
     regex(%r{(\d+(?:\.\d+)[^/]*)/GitHubDesktop[._-]#{arch}\.zip}i)
+    strategy :header_match
   end
 
   auto_updates true

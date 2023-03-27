@@ -1,6 +1,6 @@
 cask "gitfiend" do
-  version "0.34.0"
-  sha256 "34ef11ef74fdfdab8ea44e08e8233a2276e682b75dd4bdbdd0c868c743ee3427"
+  version "0.39.4"
+  sha256 "8fdee2bfe124e2ab6b24b985f5fde7603bade71d495af2ac0cf45f69d3e24a8c"
 
   url "https://gitfiend.com/resources/GitFiend-#{version}.dmg"
   name "GitFiend"
@@ -9,8 +9,8 @@ cask "gitfiend" do
 
   livecheck do
     url "https://gitfiend.com/app-info"
-    strategy :page_match do |page|
-      JSON.parse(page)["version"]
+    strategy :json do |json|
+      json["version"]
     end
   end
 

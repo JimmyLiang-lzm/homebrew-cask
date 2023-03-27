@@ -1,6 +1,6 @@
 cask "psychopy" do
-  version "2022.2.2"
-  sha256 "12922048a6e0d406aead7d2f0e769da0fe840f286b04ce06c7e9bfed08cd0c84"
+  version "2023.1.1"
+  sha256 "1d2ddd64c151cf66dea98d034233140f3762d142fa44e7648851ba1693c9fd38"
 
   url "https://github.com/psychopy/psychopy/releases/download/#{version.major_minor_patch}/StandalonePsychoPy-#{version}-macOS.dmg"
   name "PsychoPy"
@@ -10,8 +10,13 @@ cask "psychopy" do
   livecheck do
     url :url
     strategy :github_latest
-    regex(%r{href=.+/StandalonePsychoPy[._-]v?(\d+(?:\.\d+)+)[._-]macOS\.dmg}i)
   end
 
   app "PsychoPy.app"
+
+  zap trash: [
+    "~/.psychopy3",
+    "~/Library/Preferences/org.opensciencetools.psychopy.plist",
+    "~/Library/Saved Application State/org.opensciencetools.psychopy.savedState",
+  ]
 end

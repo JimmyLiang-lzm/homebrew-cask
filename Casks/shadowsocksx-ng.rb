@@ -1,9 +1,10 @@
 cask "shadowsocksx-ng" do
-  version "1.9.4"
-  sha256 "dc06a995b63f8e32be9b86c265fd2979a6d73d4742d0ff16e1b2bb8f538d77a3"
+  version "1.10.1"
+  sha256 "e99e8389e0fa9493fcca5f446f43d60bf82d4f2c94daac61f5a4c8a749112dae"
 
-  url "https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v#{version}/ShadowsocksX-NG.#{version}.zip"
+  url "https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v#{version}/ShadowsocksX-NG.dmg"
   name "ShadowsocksX-NG"
+  desc "Tunneling proxy"
   homepage "https://github.com/shadowsocks/ShadowsocksX-NG/"
 
   conflicts_with cask: "shadowsocksx"

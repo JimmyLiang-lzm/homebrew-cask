@@ -1,6 +1,6 @@
 cask "sol" do
-  version "1.1.32"
-  sha256 "c42730c17ff5f1c82c48d1d32fcc45b065e7e854ed7f055209c544120de1b3d5"
+  version "2.0.7"
+  sha256 "6cd0d9c8b7de53ce1c81c0019023acce005f6e08938cbd7c83effdfb28542297"
 
   url "https://raw.githubusercontent.com/ospfranco/sol/main/releases/#{version}.zip",
       verified: "raw.githubusercontent.com/ospfranco/sol/"
@@ -13,7 +13,7 @@ cask "sol" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Sol.app"
 

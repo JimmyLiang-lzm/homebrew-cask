@@ -1,8 +1,11 @@
 cask "superproductivity" do
-  version "7.11.5"
-  sha256 "2d857fd6813f2624991ca93e6d672156c417a139e1ed6249baa9b92fc3ea4373"
+  arch arm: "-arm64"
 
-  url "https://github.com/johannesjo/super-productivity/releases/download/v#{version}/superProductivity-#{version}-mac.zip",
+  version "7.13.1"
+  sha256 arm:   "2b02f47e5cdd1e9fd8787470cdfb62dbd6d670fa2f65faa2867dde8455e5c855",
+         intel: "75757c4797f48205306afb3111a55fb275918ee977fd508c955ec6a1eae94ca2"
+
+  url "https://github.com/johannesjo/super-productivity/releases/download/v#{version}/superProductivity-#{version}#{arch}.dmg",
       verified: "github.com/johannesjo/super-productivity/"
   name "Super Productivity"
   desc "To-do list and time tracker"
@@ -13,5 +16,7 @@ cask "superproductivity" do
   zap trash: [
     "~/Library/Application Support/superProductivity",
     "~/Library/Logs/superProductivity",
+    "~/Library/Preferences/com.super-productivity.app.plist",
+    "~/Library/Saved Application State/com.super-productivity.app.savedState",
   ]
 end
